@@ -3,7 +3,6 @@ update_beta_fused_dist <- function(y,X,beta,tau,D,k,rho,max_iter=1e2,tol=1e-4) {
   n <- nrow(X)
   
   for (i in 1:max_iter) {
-   # print(i)
     beta_last <- beta
     Xbeta <- X %*% beta
     r <- y - Xbeta

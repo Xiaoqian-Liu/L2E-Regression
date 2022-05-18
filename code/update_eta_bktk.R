@@ -1,14 +1,14 @@
 #' Update eta using Newton's method with backtracking
 #' 
-#' \code{update_eta_Newton} updates the precision parameter tau = e^eta for l2e regression using Newton's method
+#' \code{update_eta_bktk} updates the precision parameter tau = e^eta for l2e regression using Newton's method
 #' 
-#' @param y response
-#' @param r vector of residual
-#' @param eta initial estimate of eta
-#' @param max_iter maximum number of iterations
-#' @param tol relative tolerance
+#' @param y Response vector
+#' @param r Vector of residual
+#' @param eta Initial estimate of eta
+#' @param max_iter Maximum number of iterations
+#' @param tol Relative tolerance
 #' @export
-#' @examples
+#' 
 update_eta_bktk <- function(r, eta, max_iter=1e2, tol=1e-10) {
   
   
@@ -61,7 +61,7 @@ update_eta_bktk <- function(r, eta, max_iter=1e2, tol=1e-10) {
     Obj[i] <- objective(eta, r)
   }
   
-  if(i>max_iter) i=i-1  #
+  if(i>max_iter) i=i-1  
   
   return(list(eta=as.numeric(eta),iter=i, Eta=Eta[1:i], Obj=Obj[1:i],
               first_derivative_seq = first_derivative_seq[1:i],

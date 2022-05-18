@@ -72,7 +72,7 @@ l2e_regression_convex_MM <- function(y,beta,tau,max_iter=1e2,tol=1e-4,Show.Time=
     
     # update tau/eta
     r <- y - beta
-    eta_last <- log(tau)  # get eta as lin line 9
+    eta_last <- log(tau)  # get eta as in line 9
     res_eta <- update_eta_bktk(r,eta_last, tol=tol) # update eta as in line 10-12
     eta <- res_eta$eta
     tau <- exp(eta) # update tau as in line 13

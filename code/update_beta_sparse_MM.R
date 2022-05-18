@@ -28,7 +28,6 @@ update_beta_sparse_MM <- function(y,X,beta,tau,k,rho,stepsize=0.9,sigma=0.5,max_
 ProxDist <- function(beta0, rho, X, y, w, k, stepsize=0.9, sigma=0.5, max_iter=1e2, tol=1e-4){
   n <- nrow(X)
   p <- ncol(X)
-  #profvis({
   
   # prepare the inverse matrix
   Ip <- Diagonal(n=p, x=1)
@@ -68,18 +67,13 @@ ProxDist <- function(beta0, rho, X, y, w, k, stepsize=0.9, sigma=0.5, max_iter=1
     
     beta1 <- beta0+eta*v
     
-    ## if ignore backtracking
-    # z0 <- Proj_sparse(beta0, k)
-    # q <- XtWy + rho*z0
-    # beta1 <- as.vector(S%*%q)
-    
     if (norm(as.matrix(beta1-beta0),'f') < tol*(1 + norm(as.matrix(beta0),'f'))) {
       break
     }else{
       beta0 <- beta1
     }
   }
-  #})
+  
   return(list(beta = beta1, iter = j))
 }
 

@@ -1,4 +1,4 @@
-#' L2E Fused Regression with distance penaaty
+#' L2E Fused Regression with distance penalty
 #' 
 #' \code{l2e_regression_fused_dist} Performs robust fused regression under the L2 criterion with distance penalty
 #' 
@@ -7,11 +7,11 @@
 #' @param beta Initial vector of regression coefficients
 #' @param tau Initial precision estimate
 #' @param D The fusion matrix
-#' @param k The number of nonzero entries in Dbeta
-#' @param rho The parameter in the proximal distance algrotihm
+#' @param k The number of nonzero entries in `D %*% beta`
+#' @param rho The parameter in the proximal distance algorithm
 #' @param max_iter Maximum number of iterations
 #' @param tol Relative tolerance
-#' @param Shou.Time Report the computing time
+#' @param Show.Time Report the computing time
 #' @export
 #' 
 l2e_regression_fused_dist <- function(y, X, beta, tau, D, k, rho=1,  max_iter=1e2,
@@ -27,7 +27,7 @@ l2e_regression_fused_dist <- function(y, X, beta, tau, D, k, rho=1,  max_iter=1e
     beta <- sol_beta$beta 
     # update tau
     r <- y - X%*%beta
-    eta_last <- log(tau)  # get eta as lin line 9
+    eta_last <- log(tau)  # get eta as in line 9
     res_eta <- update_eta_bktk(r,eta_last, tol=tol) # update eta as in line 10-12
     eta <- res_eta$eta
     tau <- exp(eta) # update tau as in line 13

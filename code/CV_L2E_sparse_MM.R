@@ -1,14 +1,14 @@
 #'  Cross Validation for L2E Sparse Regression with distance penalization
 #' 
-#' \code{CV_L2E_sparse_MM} performs k-fold cross-validation for robust sparse regression undere the L2 criterion with
+#' \code{CV_L2E_sparse_MM} performs k-fold cross-validation for robust sparse regression under the L2 criterion with
 #' distance penalty
 #' 
 #' @param y Response vector
 #' @param X Design matrix
-#' @param beta0 Initial vector of regression coefficients, can be missed
-#' @param tau0 Initial precision estimate
-#' @param kSeq  A sequence of tuning parameter k,the number of nonzero entries in the estimated coefficients
-#' @param rhoSeq A sequence of tuning parameter rho, can be missed
+#' @param beta0 Initial vector of regression coefficients, can be omitted
+#' @param tau0 Initial precision estimate, can be omitted
+#' @param kSeq  A sequence of tuning parameter k, the number of nonzero entries in the estimated coefficients
+#' @param rhoSeq A sequence of tuning parameter rho, can be omitted
 #' @param nfolds The number of cross-validation folds. Default is 10.
 #' @param seed Users can set the seed of the random number generator to obtain reproducible results.
 #' @param method Median or mean to compute the objective
@@ -65,7 +65,7 @@ CV_L2E_sparse_MM <- function(y, X, beta0, tau0, kSeq, rhoSeq,  nfolds=5, seed=12
   min <- which.min(round(cve, 8))
   
   
-  #find the lambda.1se
+  # find the lambda.1se
   for (i in min:1) {
     if(cve[i]>cve[min]+cvse[min])
       break
@@ -107,7 +107,7 @@ cv_fold_l2e_MM <- function(i, y, X, fold, cv.args, method="median") {
     r <- y_out - Xbeta
     tauhat <- fit.i$Tau[l]
     
-    loss[l] <- objective_tau(tau = tauhat, r = r, method=method) ### use median istead of mean to account for outliers
+    loss[l] <- objective_tau(tau = tauhat, r = r, method=method) ### use median instead of mean to account for outliers
   }
   
   return(loss)

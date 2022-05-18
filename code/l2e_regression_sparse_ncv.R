@@ -1,4 +1,4 @@
-#' L2E Sparse Regression with exisitng penalization methods
+#' L2E Sparse Regression with existing penalization methods
 #' 
 #' \code{l2e_regression_sparse_MM} Performs robust sparse regression under the L2 criterion. Available penalties include lasso, MCP and SCAD. 
 
@@ -6,7 +6,7 @@
 #' @param X Design matrix
 #' @param beta Initial vector of regression coefficients
 #' @param tau Initial precision estimate
-#' @param lambda Tunning parameter
+#' @param lambda Tuning parameter
 #' @param penalty Available penalties include lasso, MCP and SCAD.
 #' @param max_iter Maximum number of iterations
 #' @param tol Relative tolerance
@@ -25,7 +25,7 @@ l2e_regression_sparse_ncv <- function(y, X, beta, tau, lambda, penalty, max_iter
     beta <- sol_beta$beta 
     # update tau
     r <- y - X%*%beta
-    eta_last <- log(tau)  # get eta as lin line 9
+    eta_last <- log(tau)  # get eta as in line 9
     res_eta <- update_eta_bktk(r,eta_last, tol=tol) # update eta as in line 10-12
     eta <- res_eta$eta
     tau <- exp(eta) # update tau as in line 13

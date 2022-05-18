@@ -4,11 +4,11 @@
 #' 
 #' @param y Response vector
 #' @param X Design matrix
-#' @param beta0 Initial vector of regression coefficients
-#' @param tau0 Initial precision estimate
+#' @param beta0 Initial vector of regression coefficients, can be omitted
+#' @param tau0 Initial precision estimate, can be omitted
 #' @param D The fusion matrix
-#' @param kSeq  A sequence of tuning parameter k,the number of nonzero entries in the estimated coefficients
-#' @param rhoSeq A sequence of tuning parameter rho, can be missed
+#' @param kSeq  A sequence of tuning parameter k, the number of nonzero entries in the estimated coefficients
+#' @param rhoSeq A sequence of tuning parameter rho, can be omitted
 #' @param nfolds The number of cross-validation folds. Default is 5.
 #' @param seed Users can set the seed of the random number generator to obtain reproducible results.
 #' @param method Median or mean to calculate the objective value
@@ -30,7 +30,7 @@ CV_L2E_fused_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, nfolds=5, seed
   }
   
   if(missing(tau0)){
-    tau0 <- 1/mad(y)   # initial tau
+    tau0 <- 1/mad(y) # initial tau
   }
   
   # Set up folds
@@ -61,12 +61,12 @@ CV_L2E_fused_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, nfolds=5, seed
   }
   
   # Return
-  cve <- apply(Loss, 2, median) ### use median istead of mean to account for outliers
+  cve <- apply(Loss, 2, median) ### use median instead of mean to account for outliers
   cvse <- apply(Loss, 2, sd)/sqrt(nfolds)
   min <- which.min(cve)
   
   
-  #find the k.1se
+  # find the k.1se
   for (i in min:1) {
     if(cve[i]>cve[min]+cvse[min])
       break
@@ -79,9 +79,6 @@ CV_L2E_fused_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, nfolds=5, seed
     min_1se <- i+1
   }
   
-  
-  # val <- list(cve=cve, cvse=cvse, lambda=lambda, fit=fit, fold=fold, min=min,
-  #             min_1se=min_1se, lambda.min=lambda[min], lambda.1se=lambda.1se)
   
   return(list(cve=cve, cvse=cvse, min=min, k.min=kSeq[min], min_1se=min_1se, k.1se=k.1se,
               kSeq=kSeq, rhoSeq = rhoSeq, fold=fold))
@@ -111,10 +108,9 @@ cv_fold_fused_dist <- function(i, y, X, fold, cv.args, method="median") {
     r <- y_out - Xbeta
     tauhat <- fit.i$Tau[l]
     
-    loss[l] <- objective_tau(tau = tauhat, r = r, method=method)### use median istead of mean to account for outliers
+    loss[l] <- objective_tau(tau = tauhat, r = r, method=method) ### use median instead of mean to account for outliers
   }
   
-  #list(loss=loss, nl=length(fit.i$lambda), yhat=yhat)
   return(loss)
 }
 

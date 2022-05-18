@@ -7,7 +7,7 @@
 #' @param beta Initial vector of regression coefficients
 #' @param tau Initial precision estimate
 #' @param k The number of nonzero entries in the estimated coefficients
-#' @param rho The parameter in the proximal distance algrotihm
+#' @param rho The parameter in the proximal distance algorithm
 #' @param stepsize The stepsize parameter for the MM algorithm (0, 1)
 #' @param sigma The halving parameter sigma (0, 1)
 #' @param max_iter Maximum number of iterations
@@ -29,7 +29,7 @@ l2e_regression_sparse_MM <- function(y, X, beta, tau, k, rho=1, stepsize = 0.9, 
 
     # update tau
     r <- y - X%*%beta
-    eta_last <- log(tau)  # get eta as lin line 9
+    eta_last <- log(tau)  # get eta as in line 9
     res_eta <- update_eta_bktk(r,eta_last, tol=tol) # update eta as in line 10-12
     eta <- res_eta$eta
     tau <- exp(eta) # update tau as in line 13

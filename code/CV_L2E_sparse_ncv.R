@@ -5,9 +5,9 @@
 #' 
 #' @param y Response vector
 #' @param X Design matrix
-#' @param beta0 Initial vector of regression coefficients
-#' @param tau0 Initial precision estimate
-#' @param lambdaSeq A decreasing sequence of tuning parameter lambda
+#' @param beta0 Initial vector of regression coefficients, can be omitted
+#' @param tau0 Initial precision estimate, can be omitted
+#' @param lambdaSeq A decreasing sequence of tuning parameter lambda, can be omitted
 #' @param penalty Available penalties include lasso, MCP and SCAD.
 #' @param nfolds The number of cross-validation folds. Default is 5.
 #' @param seed Users can set the seed of the random number generator to obtain reproducible results.
@@ -66,7 +66,7 @@ CV_L2E_sparse_ncv <- function(y, X, beta0, tau0, lambdaSeq,  penalty="MCP", nfol
   min <- which.min(round(cve,8))
   
   
-  #find the lambda.1se
+  # find the lambda.1se
   for (i in min:1) {
     if(cve[i]>cve[min]+cvse[min])
       break
@@ -110,7 +110,7 @@ cv_fold_l2e_ncv <- function(i, y, X, fold, cv.args, method="median") {
     r <- y_out - Xbeta
     tauhat <- fit.i$Tau[l]
     
-    loss[l] <- objective_tau(tau = tauhat, r = r, method=method) ### use median istead of mean to account for outliers
+    loss[l] <- objective_tau(tau = tauhat, r = r, method=method) ### use median instead of mean to account for outliers
   }
 
   return(loss)

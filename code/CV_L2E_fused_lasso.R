@@ -4,10 +4,10 @@
 #' 
 #' @param y Response vector
 #' @param X Design matrix
-#' @param beta0 Initial vector of regression coefficients, can be missed
-#' @param tau0 Initial precision estimate
+#' @param beta0 Initial vector of regression coefficients, can be omitted
+#' @param tau0 Initial precision estimate, can be omitted
 #' @param D The fusion matrix
-#' @param lambdaSeq A sequence of tuning parameter lambda, can be missed
+#' @param lambdaSeq A sequence of tuning parameter lambda, can be omitted
 #' @param nfolds The number of cross-validation folds. Default is 10.
 #' @param seed Users can set the seed of the random number generator to obtain reproducible results.
 #' @param method Median or mean to calculate the objective value
@@ -61,12 +61,12 @@ CV_L2E_fused_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, nfolds=5, seed=1
   }
   
   # Return
-  cve <- apply(Loss, 2, median)  ### use median istead of mean to account for the possibility of outlieirs in the hold-out fold
+  cve <- apply(Loss, 2, median)  ### use median instead of mean to account for the possibility of outlieirs in the hold-out fold
   cvse <- apply(Loss, 2, sd)/sqrt(nfolds)
   min <- which.min(cve)
   
   
-  #find the lambda.1se
+  # find the lambda.1se
   for (i in min:1) {
     if(cve[i]>cve[min]+cvse[min])
       break
@@ -81,8 +81,6 @@ CV_L2E_fused_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, nfolds=5, seed=1
   }
   
   
-  # val <- list(cve=cve, cvse=cvse, lambda=lambda, fit=fit, fold=fold, min=min,
-  #             min_1se=min_1se, lambda.min=lambda[min], lambda.1se=lambda.1se)
   
   return(list(cve=cve, cvse=cvse, min=min, lambda.min=lambdaSeq[min], min_1se=min_1se, 
               lambda.1se=lambda.1se, lambdaSeq=lambdaSeq, fold=fold))
@@ -112,10 +110,9 @@ cv_fold_fused_lasso <- function(i, y, X, fold, cv.args, method="median") {
     r <- y_out - Xbeta
     tauhat <- fit.i$Tau[l]
     
-    loss[l] <- objective_tau(tau = tauhat, r = r, method=method) ### use median istead of mean to account for outliers
+    loss[l] <- objective_tau(tau = tauhat, r = r, method=method) ### use median instead of mean to account for outliers
   }
   
-  #list(loss=loss, nl=length(fit.i$lambda), yhat=yhat)
   return(loss)
 }
 

@@ -1,10 +1,10 @@
 #' Objective function of the L2E regression
 #' 
-#' \code{objective} compute the obejctive of the L2E regression 
+#' \code{objective} compute the objective of the L2E regression 
 #' 
-#' @param eta the current estimate of tau
-#' @param r vector of residual
-#' @param method mean or median 
+#' @param eta The current estimate of eta
+#' @param r Vector of residuals
+#' @param method Mean or median 
 #' @export
 objective <- function(eta, r, method="mean"){
   
@@ -24,11 +24,11 @@ objective <- function(eta, r, method="mean"){
 
 #' Objective function of the L2E regression
 #' 
-#' \code{objective_tau} compute the obejctive of the L2E regression 
+#' \code{objective_tau} compute the objective of the L2E regression 
 #' 
-#' @param tau the current estimate of tau
-#' @param r vector of residual
-#' @param method mean or median 
+#' @param tau The current estimate of tau
+#' @param r Vector of residuals
+#' @param method Mean or median 
 #' @export
 objective_tau <- function(tau, r, method="mean"){
   

@@ -10,7 +10,7 @@
 #' @param lambda The tuning parameter 
 #' @param max_iter Maximum number of iterations
 #' @param tol Relative tolerance
-#' @param Shou.Time Report the computing time
+#' @param Show.Time Report the computing time
 #' @export
 #' 
 l2e_regression_fused_lasso <- function(y, X, beta, tau, D, lambda=1, max_iter=1e2,
@@ -26,7 +26,7 @@ l2e_regression_fused_lasso <- function(y, X, beta, tau, D, lambda=1, max_iter=1e
     beta <- sol_beta$beta 
     # update tau
     r <- y - X%*%beta
-    eta_last <- log(tau)  # get eta as lin line 9
+    eta_last <- log(tau)  # get eta as in line 9
     res_eta <- update_eta_bktk(r,eta_last, max_iter=10, tol=tol) # update eta as in line 10-12
     eta <- res_eta$eta
     tau <- exp(eta) # update tau as in line 13

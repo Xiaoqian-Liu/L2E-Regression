@@ -1,13 +1,13 @@
 #' L2E Isotonic Regression - MM
 #' 
 #' \code{l2e_regression_isotonic} performs L2E isotonic regression via block coordinate descent 
-#' with MM for updating beta andtau
+#' with MM for updating beta and tau
 #' 
-#' @param y response
-#' @param beta initial vector of regression coefficients
-#' @param tau initial precision estimate
-#' @param max_iter maximum number of iterations
-#' @param tol relative tolerance
+#' @param y Response vector
+#' @param beta Initial vector of regression coefficients
+#' @param tau Initial precision estimate
+#' @param max_iter Maximum number of iterations
+#' @param tol Relative tolerance
 #' @param Show.Time Report the computing time
 #' @export
 #' @examples
@@ -72,7 +72,7 @@ l2e_regression_isotonic_MM <- function(y,beta,tau,max_iter=1e2,tol=1e-4, Show.Ti
     
     # update tau
     r <- y - beta
-    eta_last <- log(tau)  # get eta as lin line 9
+    eta_last <- log(tau)  # get eta as in line 9
     res_eta <- update_eta_bktk(r,eta_last, tol=tol) # update eta as in line 10-12
     eta <- res_eta$eta
     tau <- exp(eta) # update tau as in line 13

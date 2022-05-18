@@ -13,7 +13,6 @@ update_beta_sparse_ncv <- function(y,X,beta,tau,lambda, penalty, max_iter=1e2,to
     W <- Diagonal(n=n, x = sqrt(as.vector(w)))
     Xtilde <- as.matrix(W%*%X)
     ytilde <- as.vector(W%*%y)
-    #lam <- sqrt(pi/2)*lambda/(tau^3/n)
     beta <- as.vector(ncvfit(Xtilde, ytilde, init = beta_last, penalty=penalty,lambda = lambda,
                              max.iter = 100, warn = FALSE)$beta)
     

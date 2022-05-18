@@ -1,11 +1,11 @@
 #' Compute kth order differencing matrix
 #' 
-#' @param k order of the differencing matrix
+#' @param k Order of the differencing matrix
 #' @param n Number of time points
 #' @export
 myGetDkn <- function(k, n) {
   
-  D1n<-function(n){         #a function generates 1-st order differnce matrix with n cloumns
+  D1n<-function(n){         # a function generates 1-st order difference matrix with n columns
     D1n=matrix(0, nrow = (n-1), ncol = n)
     for (i in 1:(n-1)) {
       D1n[i,i]=-1
