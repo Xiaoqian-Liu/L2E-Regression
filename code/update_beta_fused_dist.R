@@ -52,10 +52,10 @@ f <- function(X, y, beta, k, rho){
 #' @param b  the vector on the right-side hand
 #' @param x0  the initial vector for the solution
 #' @export
-
+#' 
 cg <- function(A, b, x0, tol=1e-3, maxiter=1e3){
   A=Matrix(A, sparse = TRUE)
-  #first check A
+  # first check A
   if(isSymmetric(A)=="FALSE"){
     print("Error: The A matrix is not symmetric!")
   }
@@ -97,7 +97,6 @@ gradient_descent <- function(y, X, w, beta, D, rho, k, max_iter=1e2, tol=1e-5){
   XtWX <- XtW%*%X
   
   for (i in 1:max_iter) {
-    #print(i)
     beta_last <- beta
     a <- XtWX%*%beta_last
     Dbeta <- as.vector(D%*%beta_last)
@@ -110,7 +109,6 @@ gradient_descent <- function(y, X, w, beta, D, rho, k, max_iter=1e2, tol=1e-5){
     Dv <- as.vector(D%*%gradient)
 
     stepsize <- as.numeric(norm(gradient, "2")^2/(vAv + rho*norm(Dv, "2")^2))
-    #print(stepsize)
     beta <- beta_last - stepsize*gradient
     
     if (norm(as.matrix(beta_last-beta),'f') < tol*(1 + norm(as.matrix(beta_last),'f'))) break

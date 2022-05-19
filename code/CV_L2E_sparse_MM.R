@@ -9,7 +9,7 @@
 #' @param tau0 Initial precision estimate, can be omitted
 #' @param kSeq  A sequence of tuning parameter k, the number of nonzero entries in the estimated coefficients
 #' @param rhoSeq A sequence of tuning parameter rho, can be omitted
-#' @param nfolds The number of cross-validation folds. Default is 10.
+#' @param nfolds The number of cross-validation folds. Default is 5.
 #' @param seed Users can set the seed of the random number generator to obtain reproducible results.
 #' @param method Median or mean to compute the objective
 #' @param max_iter Maximum number of iterations

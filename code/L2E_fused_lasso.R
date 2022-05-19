@@ -4,13 +4,13 @@
 #' 
 #' @param y Response vector
 #' @param X Design matrix
-#' @param beta0 Initial vector of regression coefficients
-#' @param tau0 Initial precision estimate
+#' @param beta0 Initial vector of regression coefficients, can be omitted
+#' @param tau0 Initial precision estimate, can be omitted
 #' @param D The fusion matrix
-#' @param lambdaSeq A decreasing sequence of values for the tuning parameter lambda
+#' @param lambdaSeq A decreasing sequence of values for the tuning parameter lambda, can be omitted
 #' @param max_iter Maximum number of iterations
 #' @param tol Relative tolerance
-#' @param Shou.Time Report the computing time
+#' @param Show.Time Report the computing time
 #' @export
 #' 
 L2E_fused_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, max_iter=1e2, tol=1e-4, Show.Time=TRUE){
@@ -24,7 +24,7 @@ L2E_fused_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, max_iter=1e2, tol=1
   }
   
   if(missing(lambdaSeq)){
-    lambdaSeq <- 10^seq(1, -4, length.out = 20)  # set a sequence of rho
+    lambdaSeq <- 10^seq(1, -4, length.out = 20)  # set a sequence of lambda
   }
   
   

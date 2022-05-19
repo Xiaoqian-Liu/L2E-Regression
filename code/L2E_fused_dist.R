@@ -4,14 +4,14 @@
 #' 
 #' @param y Response vector
 #' @param X Design matrix
-#' @param beta0 Initial vector of regression coefficients
-#' @param tau0 Initial precision estimate
+#' @param beta0 Initial vector of regression coefficients, can be omitted
+#' @param tau0 Initial precision estimate, can be omitted
 #' @param D The fusion matrix
 #' @param kSeq A sequence of tuning parameter k, the number of nonzero entries in the estimated coefficients
-#' @param rhoSeq A increasing sequence of tuning parameter rho
+#' @param rhoSeq An increasing sequence of tuning parameter rho, can be omitted
 #' @param max_iter Maximum number of iterations
 #' @param tol Relative tolerance
-#' @param Shou.Time Report the computing time
+#' @param Show.Time Report the computing time
 #' @export
 #' 
 L2E_fused_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, max_iter=1e2,tol=1e-4, Show.Time=TRUE) {

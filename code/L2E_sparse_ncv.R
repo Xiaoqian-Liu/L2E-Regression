@@ -4,9 +4,9 @@
 #' 
 #' @param y Response vector
 #' @param X Design matrix
-#' @param b Initial vector of regression coefficients
-#' @param tau Initial precision estimate
-#' @param lambdaSeq A decreasing sequence of values for the tuning parameter lambda
+#' @param b Initial vector of regression coefficients, can be omitted
+#' @param tau Initial precision estimate, can be omitted
+#' @param lambdaSeq A decreasing sequence of values for the tuning parameter lambda, can be omitted
 #' @param penalty Available penalties include lasso, MCP and SCAD.
 #' @param max_iter Maximum number of iterations
 #' @param tol Relative tolerance

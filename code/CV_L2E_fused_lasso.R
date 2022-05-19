@@ -8,7 +8,7 @@
 #' @param tau0 Initial precision estimate, can be omitted
 #' @param D The fusion matrix
 #' @param lambdaSeq A sequence of tuning parameter lambda, can be omitted
-#' @param nfolds The number of cross-validation folds. Default is 10.
+#' @param nfolds The number of cross-validation folds. Default is 5.
 #' @param seed Users can set the seed of the random number generator to obtain reproducible results.
 #' @param method Median or mean to calculate the objective value
 #' @param max_iter Maximum number of iterations

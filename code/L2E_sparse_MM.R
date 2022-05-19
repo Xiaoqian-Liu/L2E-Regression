@@ -1,13 +1,13 @@
 #' L2E Sparse Regression with distance penalization
 #' 
-#' \code{L2E_sparse_MM} computes the solution path of the robust sparse regression under the L2 criterion with distance penalty
+#' \code{L2E_sparse_MM} Computes the solution path of the robust sparse regression under the L2 criterion with distance penalty
 #' 
 #' @param y Response vector
 #' @param X Design matrix
-#' @param beta0 Initial vector of regression coefficients, can be missed
-#' @param tau0 Initial precision estimate, can be missed
+#' @param beta0 Initial vector of regression coefficients, can be omitted
+#' @param tau0 Initial precision estimate, can be omitted
 #' @param kSeq A sequence of tuning parameter k, the number of nonzero entries in the estimated coefficients
-#' @param rhoSeq A increasing sequence of tuning parameter rho, can be missed
+#' @param rhoSeq An increasing sequence of tuning parameter rho, can be omitted
 #' @param stepsize The stepsize parameter for the MM algorithm (0, 1)
 #' @param sigma The halving parameter sigma (0, 1)
 #' @param max_iter Maximum number of iterations
