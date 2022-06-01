@@ -1,6 +1,6 @@
 #' Update eta using Newton's method with backtracking
 #' 
-#' \code{update_eta_bktk} updates the precision parameter tau = e^eta for l2e regression using Newton's method
+#' \code{update_eta_bktk} Updates the precision parameter tau = e^eta for L2E regression using Newton's method
 #' 
 #' @param y Response vector
 #' @param r Vector of residual
@@ -23,6 +23,8 @@ update_eta_bktk <- function(r, eta, max_iter=1e2, tol=1e-10) {
   Eta <- double(max_iter)
   Obj <- double(max_iter)
   
+  if ( exp(eta)<=0 ) print("non-positive initial tau in update_eta_bktk")
+  
   for (i in 1:max_iter) {
     
     eta_last <- eta
@@ -31,6 +33,8 @@ update_eta_bktk <- function(r, eta, max_iter=1e2, tol=1e-10) {
     # some elements for computing the derivatives
     v1 <- exp(-0.5*tau_last^2*r_sq) # the w_i's
     v2 <- r_sq*v1
+    
+    if(all(round(v1,2)==1)) break # Check if v1 is close to 1
     
     first_derivative <- tau_last/(2*sqrt(pi)) - tau_last*sqrt(2/pi)*mean(v1)+
       tau_last^3*sqrt(2/pi)*mean(v2)
