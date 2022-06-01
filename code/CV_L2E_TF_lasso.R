@@ -3,7 +3,7 @@
 #' \code{CV_L2E_TF_lasso} Performs k-fold cross-validation for robust trend filtering regression under the L2 criterion with the Lasso penalty
 #' 
 #' @param y Response vector
-#' @param X Design matrix
+#' @param X Design matrix, identity matrix by default
 #' @param beta0 Initial vector of regression coefficients, can be omitted
 #' @param tau0 Initial precision estimate, can be omitted
 #' @param D The fusion matrix
@@ -21,7 +21,7 @@ CV_L2E_TF_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, nfolds=5, seed=1234
   
   
   if(missing(X)){
-    X <- diag(nrow = length(y))  # initial X is identity matrix by default
+    X <- diag(nrow = length(y))  # initial X
   }
   
   if(missing(beta0)){
