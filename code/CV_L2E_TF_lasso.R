@@ -20,11 +20,9 @@ CV_L2E_TF_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, nfolds=5, seed=1234
                               max_iter=1e2, tol=1e-4, trace=TRUE) {
   
   
-  
-  if(missing(lambdaSeq)){
-    lambdaSeq <- 10^seq(1, -4, length.out = 20)  # set a sequence of lambda
+  if(missing(X)){
+    X <- diag(nrow = length(y))  # initial X is identity matrix by default
   }
-  
   
   if(missing(beta0)){
     beta0 <-  rep(mean(y), ncol(X))  # initial beta
@@ -32,6 +30,10 @@ CV_L2E_TF_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, nfolds=5, seed=1234
   
   if(missing(tau0)){
     tau0 <- 1/mad(y)   # initial tau
+  }
+  
+  if(missing(lambdaSeq)){
+    lambdaSeq <- 10^seq(1, -4, length.out = 20)  # set a sequence of lambda
   }
   
   # Set up folds

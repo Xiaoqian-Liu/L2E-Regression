@@ -21,8 +21,8 @@ CV_L2E_TF_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, nfolds=5, seed=12
                              max_iter=1e2, tol=1e-4, trace=TRUE) {
   
   
-  if(missing(rhoSeq)){
-    rhoSeq <- 10^seq(0, 4, length.out = 20)  # set a sequence of rho
+  if(missing(X)){
+    X <- diag(nrow = length(y))  # initial X is identity matrix by default
   }
   
   if(missing(beta0)){
@@ -31,6 +31,10 @@ CV_L2E_TF_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, nfolds=5, seed=12
   
   if(missing(tau0)){
     tau0 <- 1/mad(y) # initial tau
+  }
+  
+  if(missing(rhoSeq)){
+    rhoSeq <- 10^seq(0, 4, length.out = 20)  # set a sequence of rho
   }
   
   # Set up folds

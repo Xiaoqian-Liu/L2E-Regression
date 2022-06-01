@@ -15,6 +15,10 @@
 #' 
 L2E_TF_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, max_iter=1e2, tol=1e-4, Show.Time=TRUE){
   
+  if(missing(X)){
+    X <- diag(nrow = length(y))  # initial X is identity matrix by default
+  }
+  
   if(missing(beta0)){
     beta0 <- rep(mean(y), ncol(X))  # initial beta
   }
@@ -37,7 +41,7 @@ L2E_TF_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, max_iter=1e2, tol=1e-4
   time <- proc.time()
   for (j in 1:Nlambda) {
     
-    res <- l2e_regression_TF_lasso(y, X, beta0, tau0, D, lambda=lambdaSeq[j], 
+    res <- l2e_regression_TF_lasso(y, X, beta=beta0, tau=tau0, D=D, lambda=lambdaSeq[j], 
                                  max_iter=max_iter, tol=tol, Show.Time = FALSE)
     Beta[, j] <- beta0 <- res$beta
     Tau[j] <- res$tau # warm start tau is not good

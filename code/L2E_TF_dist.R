@@ -16,6 +16,10 @@
 #' 
 L2E_TF_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, max_iter=1e2,tol=1e-4, Show.Time=TRUE) {
   
+  if(missing(X)){
+    X <- diag(nrow = length(y))  # initial X is identity matrix by default
+  }
+  
   if(missing(beta0)){
     beta0 <- signal::filter(MedianFilter(9), y)  # initial beta, random initial is very bad
   }
@@ -48,7 +52,7 @@ L2E_TF_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, max_iter=1e2,tol=1e-
     time <- proc.time()
     for (j in 1:Nrho) {
       
-      res <- l2e_regression_TF_dist(y, X, beta = beta0, D=D, tau = tau0, k=k, rho=rhoSeq[j], 
+      res <- l2e_regression_TF_dist(y, X, beta = beta0, tau = tau0, D=D, k=k, rho=rhoSeq[j], 
                                       max_iter=max_iter, tol=tol, Show.Time = FALSE)
       beta[, j] <- beta0 <- res$beta
       tau[j] <- tau0 <- res$tau # but warm start tau here helps reduce running time
