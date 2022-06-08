@@ -33,6 +33,8 @@ CV_L2E_sparse_ncv <- function(y, X, beta0, tau0, lambdaSeq,  penalty="MCP", nfol
     tau0 <- 1/mad(y)  # initial tau
   }
   
+  if (tau0 <= 0) stop("Entered non-positive tau0")
+  
   
   # Set up folds
   if (!missing(seed)) set.seed(seed)

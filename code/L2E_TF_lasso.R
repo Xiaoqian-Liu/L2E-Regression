@@ -12,8 +12,44 @@
 #' @param tol Relative tolerance
 #' @param Show.Time Report the computing time
 #' @export
+#' @examples 
 #' 
-L2E_TF_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, max_iter=1e2, tol=1e-4, Show.Time=TRUE){
+#' set.seed(12345)
+#' n <- 200
+#' f <- matrix(rep(c(-2,5,0,-10), each=50), ncol=1)
+#' y <- y0 <- f + rnorm(length(f))
+#' x <- 1:length(y)
+#' 
+#' ## Clean Data
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' 
+#' D <- myGetDkn(1, n)
+#' lambda <- 10^seq(1, -1, length.out=3)
+#' sol <- L2E_TF_lasso(y=y, D=D, lambdaSeq=lambda)
+#' 
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' lines(x, sol$Beta[,1], col='blue', lwd=3) ## 1st lambda
+#' lines(x, sol$Beta[,2], col='red', lwd=3) ## 2nd lambda
+#' lines(x, sol$Beta[,3], col='green', lwd=3) ## 3rd lambda
+#' 
+#' ## Contaminated Data
+#' ix <- sample(1:n, 10)
+#' y[ix] <- y0[ix] + 2
+#' 
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' 
+#' sol <- L2E_TF_lasso(y=y, D=D, lambdaSeq=lambda)
+#' 
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' lines(x, sol$Beta[,1], col='blue', lwd=3) ## 1st lambda
+#' lines(x, sol$Beta[,2], col='red', lwd=3) ## 2nd lambda
+#' lines(x, sol$Beta[,3], col='green', lwd=3) ## 3rd lambda
+#' 
+L2E_TF_lasso <- function(y,X,beta0,tau0,D,lambdaSeq,max_iter=1e2,tol=1e-4,Show.Time=TRUE){
   
   if(missing(X)){
     X <- diag(nrow = length(y))  # initial X
@@ -26,6 +62,8 @@ L2E_TF_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, max_iter=1e2, tol=1e-4
   if(missing(tau0)){
     tau0 <- 1/mad(y)  # initial tau
   }
+  
+  if (tau0 <= 0) stop("Entered non-positive tau0")
   
   if(missing(lambdaSeq)){
     lambdaSeq <- 10^seq(1, -4, length.out = 20)  # set a sequence of lambda

@@ -15,9 +15,46 @@
 #' @param tol Relative tolerance
 #' @param trace Whether to trace the progress of the cross-validation
 #' @export
+#' @examples 
 #' 
-CV_L2E_TF_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, nfolds=5, seed=1234, method="median",
-                              max_iter=1e2, tol=1e-4, trace=TRUE) {
+#' set.seed(12345)
+#' n <- 200
+#' f <- matrix(rep(c(-2,5,0,-10), each=50), ncol=1)
+#' y <- y0 <- f + rnorm(length(f))
+#' x <- 1:length(y0)
+#' 
+#' ## Clean Data
+#' plot(x, y0, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' 
+#' D <- myGetDkn(1, n)
+#' cv <- CV_L2E_TF_lasso(y=y0, D=D, seed=1234)
+#' lambda <- cv$lambda.min
+#' 
+#' sol <- L2E_TF_lasso(y=y0, D=D, lambdaSeq=lambda)
+#' 
+#' plot(x, y0, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' lines(x, sol$Beta, col='blue', lwd=3)
+#' 
+#' ## Contaminated Data
+#' ix <- sample(1:n, 10)
+#' y[ix] <- y0[ix] + 2
+#' 
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' 
+#' cv <- CV_L2E_TF_lasso(y=y, D=D, seed=1234)
+#' lambda <- cv$lambda.min
+#' 
+#' sol <- L2E_TF_lasso(y=y, D=D, lambdaSeq=lambda)
+#' 
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' lines(x, sol$Beta, col='blue', lwd=3)
+#' 
+CV_L2E_TF_lasso <- function(y,X,beta0,tau0,D,lambdaSeq,nfolds=5,seed=1234,method="median",
+                            max_iter=1e2,tol=1e-4,trace=TRUE) {
   
   
   if(missing(X)){
@@ -31,6 +68,8 @@ CV_L2E_TF_lasso <- function(y, X, beta0, tau0, D, lambdaSeq, nfolds=5, seed=1234
   if(missing(tau0)){
     tau0 <- 1/mad(y)   # initial tau
   }
+  
+  if (tau0 <= 0) stop("Entered non-positive tau0")
   
   if(missing(lambdaSeq)){
     lambdaSeq <- 10^seq(1, -4, length.out = 20)  # set a sequence of lambda

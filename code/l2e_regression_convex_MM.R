@@ -57,6 +57,8 @@
 #' dev.off()
 l2e_regression_convex_MM <- function(y,beta,tau,max_iter=1e2,tol=1e-4,Show.Time=TRUE) {
   
+  if (tau <= 0) stop("Entered non-positive initial tau")
+  
   time <- proc.time()
   
   # save the inner loop iters

@@ -23,6 +23,8 @@ L2E_sparse_ncv <- function(y,X,b,tau,lambdaSeq, penalty = "MCP", max_iter=1e2, t
     tau <- 1/mad(y)   # initial tau
   }
   
+  if (tau <= 0) stop("Entered non-positive initial tau")
+  
   if(missing(lambdaSeq)){
     lambdaSeq <- 10^seq(1, -4, length.out = 20)  # set a sequence of rho
   }

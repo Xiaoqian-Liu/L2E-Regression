@@ -18,6 +18,8 @@
 l2e_regression_sparse_MM <- function(y, X, beta, tau, k, rho=1, stepsize = 0.9, sigma=0.5, max_iter=1e2,
                                       tol=1e-4, Show.Time=TRUE) {
   
+  if (tau <= 0) stop("Entered non-positive initial tau")
+  
   time <- proc.time()
   Obj <- double(max_iter)
   for (i in 1:max_iter) {

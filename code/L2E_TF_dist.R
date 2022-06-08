@@ -13,8 +13,45 @@
 #' @param tol Relative tolerance
 #' @param Show.Time Report the computing time
 #' @export
+#' @examples 
 #' 
-L2E_TF_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, max_iter=1e2,tol=1e-4, Show.Time=TRUE) {
+#' set.seed(12345)
+#' n <- 200
+#' f <- matrix(rep(c(-2,5,0,-10), each=50), ncol=1)
+#' y <- y0 <- f + rnorm(length(f))
+#' x <- 1:length(y)
+#' 
+#' ## Clean Data
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' 
+#' D <- myGetDkn(1, n)
+#' k <- c(3,2,4)
+#' rho <- 10^c(7,8,9)
+#' sol <- L2E_TF_dist(y=y, D=D, kSeq=k, rhoSeq=rho)
+#' 
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' lines(x, sol$Beta[,1], col='blue', lwd=3) ## k=3
+#' lines(x, sol$Beta[,2], col='red', lwd=3) ## k=2
+#' lines(x, sol$Beta[,3], col='green', lwd=3) ## k=4
+#' 
+#' ## Contaminated Data
+#' ix <- sample(1:n, 10)
+#' y[ix] <- y0[ix] + 2
+#' 
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' 
+#' sol <- L2E_TF_dist(y=y, D=D, kSeq=k, rhoSeq=rho)
+#' 
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' lines(x, sol$Beta[,1], col='blue', lwd=3) ## k=3
+#' lines(x, sol$Beta[,2], col='red', lwd=3) ## k=2
+#' lines(x, sol$Beta[,3], col='green', lwd=3) ## k=4
+#' 
+L2E_TF_dist <- function(y,X,beta0,tau0,D,kSeq,rhoSeq,max_iter=1e2,tol=1e-4,Show.Time=TRUE) {
   
   if(missing(X)){
     X <- diag(nrow = length(y))  # initial X
@@ -27,6 +64,8 @@ L2E_TF_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, max_iter=1e2,tol=1e-
   if(missing(tau0)){
     tau0 <- 1/mad(y)  # initial tau
   }
+  
+  if (tau0 <= 0) stop("Entered non-positive tau0")
   
   if(missing(rhoSeq)){
     rhoSeq <- 10^seq(0, 4, length.out = 20)  # set a sequence of rho

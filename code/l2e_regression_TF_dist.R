@@ -12,10 +12,11 @@
 #' @param max_iter Maximum number of iterations
 #' @param tol Relative tolerance
 #' @param Show.Time Report the computing time
-#' @export
 #' 
 l2e_regression_TF_dist <- function(y, X, beta, tau, D, k, rho=1,  max_iter=1e2,
                                      tol=1e-4,  Show.Time=TRUE) {
+  
+  if (tau <= 0) stop("Entered non-positive initial tau")
   
   time <- proc.time()
   Obj <- double(max_iter)
