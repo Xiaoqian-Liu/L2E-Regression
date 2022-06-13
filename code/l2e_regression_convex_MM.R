@@ -13,48 +13,41 @@
 #' set.seed(12345)
 #' n <- 200
 #' tau <- 1
-#' x <- seq(-2,2,length.out=n)
+#' x <- seq(-2, 2, length.out=n)
 #' f <- x^4 + x
 #' y <- f + (1/tau)*rnorm(n)
 #' 
 #' ## Clean
-#' pdf(file='convex_clean0.pdf')
-#' plot(x,y,pch=16,cex.lab=1.5, cex.axis=1.5,cex.sub=1.5)
-#' lines(x,f,col='blue',lwd=3)
-#' dev.off()
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
 #' 
 #' tau <- 1
 #' b <- y
-#' sol <- l2e_regression_convex_MM(y,b,tau)
+#' sol <- l2e_regression_convex_MM(y, b, tau)
 #' 
-#' pdf(file='convex_clean1.pdf')
-#' plot(x,y,pch=16,cex.lab=1.5, cex.axis=1.5,cex.sub=1.5)
-#' lines(x,f,col='blue',lwd=3)
-#' cvx <- fitted(shapereg(y ~ conv(1:n)))
-#' lines(x,cvx,col='red',lwd=3)
-#' lines(x,sol$beta,col='green',lwd=3)
-#' dev.off()
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' cvx <- fitted(cobs::conreg(y, convex=TRUE))
+#' lines(x, cvx, col='blue', lwd=3)
+#' lines(x, sol$beta, col='red', lwd=3)
 #' 
 #' ## Contaminated
 #' ix <- 0:9
 #' y[45 + ix] <- 14 + rnorm(10)
 #' 
-#' pdf(file='convex_contaminated0.pdf')
-#' plot(x,y,pch=16,cex.lab=1.5, cex.axis=1.5,cex.sub=1.5)
-#' lines(x,f,col='blue',lwd=3)
-#' dev.off()
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
 #' 
 #' tau <- 1
 #' b <- y
-#' sol <- l2e_regression_convex_MM(y,b,tau)
+#' sol <- l2e_regression_convex_MM(y, b, tau)
 #' 
-#' pdf(file='convex_contaminated1.pdf')
-#' plot(x,y,pch=16,cex.lab=1.5, cex.axis=1.5,cex.sub=1.5)
-#' lines(x,f,col='blue',lwd=3)
-#' cvx <- fitted(shapereg(y ~ conv(1:n)))
-#' lines(x,cvx,col='red',lwd=3)
-#' lines(x,sol$beta,col='green',lwd=3)
-#' dev.off()
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' cvx <- fitted(cobs::conreg(y, convex=TRUE))
+#' lines(x, cvx, col='blue', lwd=3)
+#' lines(x, sol$beta, col='red', lwd=3)
+#' 
 l2e_regression_convex_MM <- function(y,beta,tau,max_iter=1e2,tol=1e-4,Show.Time=TRUE) {
   
   if (tau <= 0) stop("Entered non-positive initial tau")
