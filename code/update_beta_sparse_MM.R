@@ -30,8 +30,8 @@ ProxDist <- function(beta0, rho, X, y, w, k, stepsize=0.9, sigma=0.5, max_iter=1
   p <- ncol(X)
   
   # prepare the inverse matrix
-  Ip <- Diagonal(n=p, x=1)
-  W <- Diagonal(n=n, x = w)
+  Ip <- Matrix::Diagonal(n=p, x=1)
+  W <- Matrix::Diagonal(n=n, x = w)
   XtW <- t(X)%*%W
   XtWy <- XtW%*%y
   XtWX <- XtW%*%X
@@ -42,14 +42,14 @@ ProxDist <- function(beta0, rho, X, y, w, k, stepsize=0.9, sigma=0.5, max_iter=1
   }else{
     
     XXt <- X%*%t(X)
-    H <- solve(Diagonal(n=n, x=1/w) + XXt/rho)
+    H <- solve(Matrix::Diagonal(n=n, x=1/w) + XXt/rho)
     S <- Ip/rho - t(X)%*%H%*%X/(rho^2)
   }
   
   # now start the interation
   for(j in 1:max_iter){
     z0 <- Proj_sparse(beta0, k)
-    gradf <- rho*(beta0 - z0) + XtWX%*%beta0 - XtWy
+    gradf <- as.matrix(rho*(beta0 - z0) + XtWX%*%beta0 - XtWy)
     v <- as.vector(-S%*%gradf)
     eta <- 1
     

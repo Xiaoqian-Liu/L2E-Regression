@@ -8,7 +8,6 @@
 #' @param max_iter maximum number of iterations
 #' @param tol relative tolerance
 #' @export
-#' @examples
 
 update_beta_MM_isotonic <- function(y,beta,tau,max_iter=1e2,tol=1e-4) {  
   

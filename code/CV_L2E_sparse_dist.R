@@ -1,4 +1,4 @@
-#'  Cross Validation for L2E Sparse Regression with distance penalization
+#' Cross Validation for L2E Sparse Regression with distance penalization
 #' 
 #' \code{CV_L2E_sparse_dist} performs k-fold cross-validation for robust sparse regression under the L2 criterion with
 #' distance penalty
@@ -16,6 +16,37 @@
 #' @param tol Relative tolerance
 #' @param trace Whether to trace the progress of the cross-validation
 #' @export
+#' @examples
+#' set.seed(12345)
+#' n <- 200
+#' tau <- 1
+#' f <- matrix(c(rep(2,5), rep(0,45)), ncol = 1)
+#' X <- X0 <- matrix(rnorm(n*50), nrow = n)
+#' y <- y0 <- X0 %*% f + (1/tau)*rnorm(n)
+#' x <- 1:length(f)
+#' 
+#' ## Clean Data 
+#' k <- c(3,4,5,6,7)
+#' cv <- CV_L2E_sparse_dist(y=y, X=X, kSeq=k, seed=1234)
+#' k_min <- cv$k.min
+#' 
+#' sol <- L2E_sparse_dist(y=y, X=X, kSeq=k_min)
+#' 
+#' plot(x, f, type='b', pch=1, ylim=c(-2.5,3))
+#' points(x, sol$Beta, col='blue', type='b', pch=0)
+#' 
+#' ## Contaminated Data
+#' ix <- 1:20
+#' y[ix] <- 2 + y0[ix] 
+#' X[ix,] <- 2 + X0[ix,]
+#' 
+#' cv <- CV_L2E_sparse_dist(y=y, X=X, kSeq=k, seed=1234)
+#' k_min <- cv$k.min
+#' 
+#' sol <- L2E_sparse_dist(y=y, X=X, kSeq=k_min)
+#' 
+#' plot(x, f, type='b', pch=1, ylim=c(-2.5,3))
+#' points(x, sol$Beta, col='blue', type='b', pch=0)
 #' 
 CV_L2E_sparse_dist <- function(y, X, beta0, tau0, kSeq, rhoSeq,  nfolds=5, seed=1234, method="median",
                              max_iter=1e2, tol=1e-4, trace=TRUE) {
@@ -93,7 +124,7 @@ CV_L2E_sparse_dist <- function(y, X, beta0, tau0, kSeq, rhoSeq,  nfolds=5, seed=
 cv_fold_l2e_MM <- function(i, y, X, fold, cv.args, method="median") {
   cv.args$y <- y[fold!=i]
   cv.args$X <- X[fold!=i, , drop=FALSE]
-  fit.i <- do.call("L2E_sparse_MM", cv.args)
+  fit.i <- do.call("L2E_sparse_dist", cv.args)
   
   # data in hold-out
   y_out <- y[fold==i]

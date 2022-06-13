@@ -14,7 +14,6 @@
 #' @param Show.Time Report the computing time
 #' @export
 #' @examples 
-#' 
 #' set.seed(12345)
 #' n <- 200
 #' f <- matrix(rep(c(-2,5,0,-10), each=50), ncol=1)
@@ -34,7 +33,7 @@
 #' lines(x, f, lwd=3)
 #' lines(x, sol$Beta[,1], col='blue', lwd=3) ## k=3
 #' lines(x, sol$Beta[,2], col='red', lwd=3) ## k=2
-#' lines(x, sol$Beta[,3], col='green', lwd=3) ## k=4
+#' lines(x, sol$Beta[,3], col='dark green', lwd=3) ## k=4
 #' 
 #' ## Contaminated Data
 #' ix <- sample(1:n, 10)
@@ -49,7 +48,7 @@
 #' lines(x, f, lwd=3)
 #' lines(x, sol$Beta[,1], col='blue', lwd=3) ## k=3
 #' lines(x, sol$Beta[,2], col='red', lwd=3) ## k=2
-#' lines(x, sol$Beta[,3], col='green', lwd=3) ## k=4
+#' lines(x, sol$Beta[,3], col='dark green', lwd=3) ## k=4
 #' 
 L2E_TF_dist <- function(y,X,beta0,tau0,D,kSeq,rhoSeq,max_iter=1e2,tol=1e-4,Show.Time=TRUE) {
   
@@ -58,7 +57,7 @@ L2E_TF_dist <- function(y,X,beta0,tau0,D,kSeq,rhoSeq,max_iter=1e2,tol=1e-4,Show.
   }
   
   if(missing(beta0)){
-    beta0 <- signal::filter(MedianFilter(9), y)  # initial beta, random initial is very bad
+    beta0 <- signal::filter(signal::MedianFilter(9), y)  # initial beta, random initial is very bad
   }
   
   if(missing(tau0)){

@@ -10,7 +10,6 @@
 #' @param Show.Time Report the computing time
 #' @export
 #' @examples
-#' 
 #' set.seed(12345)
 #' n <- 200
 #' tau <- 1
@@ -19,35 +18,35 @@
 #' y <- f + (1/tau)*rnorm(n)
 #' 
 #' # Clean Data
-#' plot(x, y, pch=16)
-#' lines(x, f, col='blue', lwd=3)
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
 #' 
 #' tau <- 1
 #' b <- y
 #' sol <- l2e_regression_isotonic(y, b, tau)
 #' 
-#' plot(x, y, pch=16)
-#' lines(x, f, col='blue', lwd=3)
-#' iso <- gpava(1:n, y)$x
-#' lines(x, iso, col='red', lwd=3)
-#' lines(x, sol$beta, col='green', lwd=3)
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' iso <- isotone::gpava(1:n, y)$x
+#' lines(x, iso, col='blue', lwd=3)
+#' lines(x, sol$beta, col='dark green', lwd=3)
 #' 
 #' # Contaminated Data
 #' ix <- 0:9
 #' y[45 + ix] <- 14 + rnorm(10)
 #' 
-#' plot(x, y, pch=16)
-#' lines(x, f, col='blue', lwd=3)
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
 #' 
 #' tau <- 1
 #' b <- y
 #' sol <- l2e_regression_isotonic(y, b, tau)
 #' 
-#' plot(x, y, pch=16)
-#' lines(x, f, col='blue', lwd=3)
-#' iso <- gpava(1:n, y)$x
-#' lines(x, iso, col='red', lwd=3)
-#' lines(x, sol$beta, col='green', lwd=3)
+#' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
+#' lines(x, f, lwd=3)
+#' iso <- isotone::gpava(1:n, y)$x
+#' lines(x, iso, col='blue', lwd=3)
+#' lines(x, sol$beta, col='dark green', lwd=3)
 #' 
 l2e_regression_isotonic <- function(y,b,tau,max_iter=1e2,tol=1e-4,Show.Time=TRUE) {
   
@@ -67,6 +66,5 @@ l2e_regression_isotonic <- function(y,b,tau,max_iter=1e2,tol=1e-4,Show.Time=TRUE
   
   if(Show.Time) print(proc.time() - time)
   
-  return(list(beta=b,tau=tau, iter=i,
-              iter_beta = iter_beta[1:i], iter_tau = iter_tau[1:i]))
+  return(list(beta=b,tau=tau))
 }

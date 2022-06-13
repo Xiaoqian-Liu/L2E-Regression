@@ -12,8 +12,41 @@
 #' @param tol Relative tolerance
 #' @param Show.Time Report the computing time
 #' @export
+#' @examples
+#' set.seed(12345)
+#' n <- 200
+#' tau <- 1
+#' f <- matrix(c(rep(2,5), rep(0,45)), ncol = 1)
+#' X <- X0 <- matrix(rnorm(n*50), nrow = n)
+#' y <- y0 <- X0 %*% f + (1/tau)*rnorm(n)
+#' x <- 1:length(f)
 #' 
-L2E_sparse_ncv <- function(y,X,b,tau,lambdaSeq, penalty = "MCP", max_iter=1e2, tol=1e-4,Show.Time=TRUE) {
+#' ## Clean Data 
+#' lambda <- 10^-1
+#' sol_mcp <- L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda)
+#' sol_lasso <- L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda, penalty="lasso")
+#' sol_scad <- L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda, penalty="SCAD")
+#' 
+#' plot(x, f, type='b', pch=1, ylim=c(-1,3))
+#' points(x, sol_mcp$Beta, col='blue', type='b',pch=0) ## MCP
+#' points(x, sol_lasso$Beta, col='red', type='b',pch=2) ## LASSO
+#' points(x, sol_scad$Beta, col='dark green', type='b',pch=8) ## SCAD
+#' 
+#' ## Contaminated Data
+#' ix <- 1:20
+#' y[ix] <- 2 + y0[ix] 
+#' X[ix,] <- 2 + X0[ix,]
+#' 
+#' sol_mcp <- L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda)
+#' sol_lasso <- L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda, penalty="lasso")
+#' sol_scad <- L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda, penalty="SCAD")
+#' 
+#' plot(x, f, type='b', pch=1, ylim=c(-1,3))
+#' points(x, sol_mcp$Beta, col='blue', type='b', pch=0) ## MCP
+#' points(x, sol_lasso$Beta, col='red', type='b', pch=2) ## LASSO
+#' points(x, sol_scad$Beta, col='dark green', type='b', pch=8) ## SCAD
+#' 
+L2E_sparse_ncv <- function(y,X,b,tau,lambdaSeq,penalty="MCP",max_iter=1e2,tol=1e-4,Show.Time=TRUE) {
   
   if(missing(b)){
     b <- double(ncol(X))  # initial beta

@@ -14,6 +14,35 @@
 #' @param tol Relative tolerance
 #' @param Show.Time Report the computing time
 #' @export
+#' @examples
+#' set.seed(12345)
+#' n <- 200
+#' tau <- 1
+#' f <- matrix(c(rep(2,5), rep(0,45)), ncol = 1)
+#' X <- X0 <- matrix(rnorm(n*50), nrow = n)
+#' y <- y0 <- X0 %*% f + (1/tau)*rnorm(n)
+#' x <- 1:length(f)
+#' 
+#' ## Clean Data 
+#' k <- c(4,5,6)
+#' sol <- L2E_sparse_dist(y=y, X=X, kSeq=k)
+#' 
+#' plot(x, f, type='b', pch=1, ylim=c(-2.5,3))
+#' points(x, sol$Beta[,1], col='blue', type='b', pch=0) ## k=4
+#' points(x, sol$Beta[,2], col='red', type='b', pch=2) ## k=5
+#' points(x, sol$Beta[,3], col='dark green', type='b', pch=8) ## k=6
+#' 
+#' ## Contaminated Data
+#' ix <- 1:20
+#' y[ix] <- 2 + y0[ix] 
+#' X[ix,] <- 2 + X0[ix,]
+#' 
+#' sol <- L2E_sparse_dist(y=y, X=X, kSeq=k)
+#' 
+#' plot(x, f, type='b', pch=1, ylim=c(-2.5,3))
+#' points(x, sol$Beta[,1], col='blue', type='b', pch=0) ## k=4
+#' points(x, sol$Beta[,2], col='red', type='b', pch=2) ## k=5
+#' points(x, sol$Beta[,3], col='dark green', type='b', pch=8) ## k=6
 #' 
 L2E_sparse_dist <- function(y, X, beta0, tau0, kSeq, rhoSeq, stepsize = 0.9, sigma=0.5, max_iter=1e2,
                                      tol=1e-4, Show.Time=TRUE) {

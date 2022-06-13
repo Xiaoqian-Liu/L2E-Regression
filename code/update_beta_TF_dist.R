@@ -91,7 +91,7 @@ cg <- function(A, b, x0, tol=1e-3, maxiter=1e3){
 
 gradient_descent <- function(y, X, w, beta, D, rho, k, max_iter=1e2, tol=1e-5){
   n <- length(w)
-  W <- Diagonal(n=n, x = w)
+  W <- Matrix::Diagonal(n=n, x = w)
   XtW <- t(X)%*%W
   XtWy <- XtW%*%y
   XtWX <- XtW%*%X

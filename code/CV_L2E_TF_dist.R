@@ -16,8 +16,7 @@
 #' @param tol Relative tolerance
 #' @param trace Whether to trace the progress of the cross-validation
 #' @export
-#' @examples 
-#' 
+#' @examples
 #' set.seed(12345)
 #' n <- 200
 #' f <- matrix(rep(c(-2,5,0,-10), each=50), ncol=1)
@@ -65,7 +64,7 @@ CV_L2E_TF_dist <- function(y, X, beta0, tau0, D, kSeq, rhoSeq, nfolds=5, seed=12
   }
   
   if(missing(beta0)){
-    beta0 <- signal::filter(MedianFilter(9), y) # initial beta, random initial is bad
+    beta0 <- signal::filter(signal::MedianFilter(9), y) # initial beta, random initial is bad
   }
   
   if(missing(tau0)){

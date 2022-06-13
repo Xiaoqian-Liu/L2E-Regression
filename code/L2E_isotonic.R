@@ -25,7 +25,7 @@
 #' tau <- 1
 #' b <- y
 #' ## Least Squares method
-#' iso <- gpava(1:n, y)$x
+#' iso <- isotone::gpava(1:n, y)$x
 #' ## MM method
 #' sol_mm <- L2E_isotonic(y, b, tau)
 #' ## PG method
@@ -35,7 +35,7 @@
 #' lines(x, f, lwd=3)
 #' lines(x, iso, col='blue', lwd=3) ## LS
 #' lines(x, sol_mm$beta, col='red', lwd=3) ## MM
-#' lines(x, sol_pg$beta, col='green', lwd=3) ## PG
+#' lines(x, sol_pg$beta, col='dark green', lwd=3) ## PG
 #' 
 #' ## Contaminated Data
 #' ix <- 0:9
@@ -46,7 +46,7 @@
 #' 
 #' tau <- 1
 #' b <- y
-#' iso <- gpava(1:n, y)$x
+#' iso <- isotone::gpava(1:n, y)$x
 #' sol_mm <- L2E_isotonic(y, b, tau)
 #' sol_pg <- L2E_isotonic(y, b, tau, method='PG')
 #' 
@@ -54,7 +54,8 @@
 #' lines(x, f, lwd=3)
 #' lines(x, iso, col='blue', lwd=3) ## LS
 #' lines(x, sol_mm$beta, col='red', lwd=3) ## MM
-#' lines(x, sol_pg$beta, col='green', lwd=3) ## PG
+#' lines(x, sol_pg$beta, col='dark green', lwd=3) ## PG
+#' 
 L2E_isotonic <- function(y, beta, tau, method = "MM", max_iter = 1e2, tol = 1e-4, Show.Time = TRUE) {
   
   if (tau <= 0) stop("Entered non-positive initial tau")

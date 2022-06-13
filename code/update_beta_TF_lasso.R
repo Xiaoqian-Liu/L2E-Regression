@@ -32,17 +32,17 @@ sol_TF_lasso <- function(y, X, w, D, lambda) {
   p <- ncol(X)
   r <- nrow(D)
   
-  W <- Diagonal(n=n, x = w)
+  W <- Matrix::Diagonal(n=n, x = w)
   XtW <- t(X)%*%W
   XtWy <- XtW%*%y
   XtWX <- XtW%*%X
   
-  P <- Matrix(0, nrow = p+2*r, ncol = p+2*r)
+  P <- Matrix::Matrix(0, nrow = p+2*r, ncol = p+2*r)
   P[1:p, 1:p] <- XtWX/2
   
   q <- c(as.vector(-XtWy), rep(lambda, 2*r))
 
-  A <- cbind(D, Diagonal(n=r, x=-1), Diagonal(n=r, x=1))
+  A <- cbind(D, Matrix::Diagonal(n=r, x=-1), Matrix::Diagonal(n=r, x=1))
   
   b <- rep(0,r)
   
@@ -60,7 +60,7 @@ sol_TF_lasso <- function(y, X, w, D, lambda) {
   
   params <- list(OutputFlag=0)
   
-  result <- gurobi(model, params)
+  result <- gurobi::gurobi(model, params)
   
   beta <- result$x[1:p]
   

@@ -13,7 +13,6 @@
 #' @param Show.Time Report the computing time
 #' @export
 #' @examples 
-#' 
 #' set.seed(12345)
 #' n <- 200
 #' f <- matrix(rep(c(-2,5,0,-10), each=50), ncol=1)
@@ -32,7 +31,7 @@
 #' lines(x, f, lwd=3)
 #' lines(x, sol$Beta[,1], col='blue', lwd=3) ## 1st lambda
 #' lines(x, sol$Beta[,2], col='red', lwd=3) ## 2nd lambda
-#' lines(x, sol$Beta[,3], col='green', lwd=3) ## 3rd lambda
+#' lines(x, sol$Beta[,3], col='dark green', lwd=3) ## 3rd lambda
 #' 
 #' ## Contaminated Data
 #' ix <- sample(1:n, 10)
@@ -47,7 +46,7 @@
 #' lines(x, f, lwd=3)
 #' lines(x, sol$Beta[,1], col='blue', lwd=3) ## 1st lambda
 #' lines(x, sol$Beta[,2], col='red', lwd=3) ## 2nd lambda
-#' lines(x, sol$Beta[,3], col='green', lwd=3) ## 3rd lambda
+#' lines(x, sol$Beta[,3], col='dark green', lwd=3) ## 3rd lambda
 #' 
 L2E_TF_lasso <- function(y,X,beta0,tau0,D,lambdaSeq,max_iter=1e2,tol=1e-4,Show.Time=TRUE){
   

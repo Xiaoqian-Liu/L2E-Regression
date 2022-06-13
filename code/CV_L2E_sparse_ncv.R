@@ -16,6 +16,37 @@
 #' @param tol Relative tolerance
 #' @param trace Whether to trace the progress of the cross-validation
 #' @export
+#' @examples 
+#' set.seed(12345)
+#' n <- 200
+#' tau <- 1
+#' f <- matrix(c(rep(2,5), rep(0,45)), ncol = 1)
+#' X <- X0 <- matrix(rnorm(n*50), nrow = n)
+#' y <- y0 <- X0 %*% f + (1/tau)*rnorm(n)
+#' x <- 1:length(f)
+#' 
+#' ## Clean Data 
+#' lambda <- 10^seq(1, -4, length.out=10)
+#' cv <- CV_L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda, penalty="lasso", seed=1234)
+#' lambda_min <- cv$lambda.min
+#' 
+#' sol <- L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda_min, penalty="lasso")
+#' 
+#' plot(x, f, type='b', pch=1, ylim=c(-1,3))
+#' points(x, sol$Beta, col='blue', type='b',pch=0)
+#' 
+#' ## Contaminated Data
+#' ix <- 1:20
+#' y[ix] <- 2 + y0[ix] 
+#' X[ix,] <- 2 + X0[ix,]
+#' 
+#' cv <- CV_L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda, penalty="lasso", seed=1234)
+#' lambda <- cv$lambda.min
+#' 
+#' sol <- L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda_min, penalty="lasso")
+#' 
+#' plot(x, f, type='b', pch=1, ylim=c(-1,3))
+#' points(x, sol$Beta, col='blue', type='b',pch=0)
 #' 
 CV_L2E_sparse_ncv <- function(y, X, beta0, tau0, lambdaSeq,  penalty="MCP", nfolds=5, seed=1234, method="median", 
                           max_iter=1e2, tol=1e-4, trace=TRUE) {

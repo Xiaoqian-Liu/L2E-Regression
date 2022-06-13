@@ -16,7 +16,6 @@
 #' @param trace Whether to trace the progress of the cross-validation
 #' @export
 #' @examples 
-#' 
 #' set.seed(12345)
 #' n <- 200
 #' f <- matrix(rep(c(-2,5,0,-10), each=50), ncol=1)
