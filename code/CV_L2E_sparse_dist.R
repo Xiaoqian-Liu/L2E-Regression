@@ -28,7 +28,7 @@
 #' ## Clean Data 
 #' k <- c(3,4,5,6,7)
 #' cv <- CV_L2E_sparse_dist(y=y, X=X, kSeq=k, seed=1234)
-#' k_min <- cv$k.min
+#' (k_min <- cv$k.min) ## selected number of nonzero entries
 #' 
 #' sol <- L2E_sparse_dist(y=y, X=X, kSeq=k_min)
 #' 
@@ -41,7 +41,7 @@
 #' X[ix,] <- 2 + X0[ix,]
 #' 
 #' cv <- CV_L2E_sparse_dist(y=y, X=X, kSeq=k, seed=1234)
-#' k_min <- cv$k.min
+#' (k_min <- cv$k.min) ## selected number of nonzero entries
 #' 
 #' sol <- L2E_sparse_dist(y=y, X=X, kSeq=k_min)
 #' 

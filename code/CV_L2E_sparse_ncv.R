@@ -26,9 +26,9 @@
 #' x <- 1:length(f)
 #' 
 #' ## Clean Data 
-#' lambda <- 10^seq(1, -4, length.out=10)
+#' lambda <- 10^seq(-4, 1, length.out=20)
 #' cv <- CV_L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda, penalty="lasso", seed=1234)
-#' lambda_min <- cv$lambda.min
+#' (lambda_min <- cv$lambda.min) 
 #' 
 #' sol <- L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda_min, penalty="lasso")
 #' 
@@ -41,7 +41,7 @@
 #' X[ix,] <- 2 + X0[ix,]
 #' 
 #' cv <- CV_L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda, penalty="lasso", seed=1234)
-#' lambda <- cv$lambda.min
+#' (lambda_min <- cv$lambda.min)
 #' 
 #' sol <- L2E_sparse_ncv(y=y, X=X, lambdaSeq=lambda_min, penalty="lasso")
 #' 

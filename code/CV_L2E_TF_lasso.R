@@ -1,9 +1,9 @@
-#' Cross Validation for L2E Trend Filtering Regression with distance penalization
+#' Cross Validation for L2E Trend Filtering Regression with Lasso penalization
 #' 
 #' \code{CV_L2E_TF_lasso} Performs k-fold cross-validation for robust trend filtering regression under the L2 criterion with the Lasso penalty
 #' 
 #' @param y Response vector
-#' @param X Design matrix, identity matrix by default
+#' @param X Design matrix. Default is the identity matrix.
 #' @param beta0 Initial vector of regression coefficients, can be omitted
 #' @param tau0 Initial precision estimate, can be omitted
 #' @param D The fusion matrix
@@ -15,7 +15,7 @@
 #' @param tol Relative tolerance
 #' @param trace Whether to trace the progress of the cross-validation
 #' @export
-#' @examples 
+#' @examples
 #' set.seed(12345)
 #' n <- 200
 #' f <- matrix(rep(c(-2,5,0,-10), each=50), ncol=1)
@@ -27,10 +27,11 @@
 #' lines(x, f, lwd=3)
 #' 
 #' D <- myGetDkn(1, n)
-#' cv <- CV_L2E_TF_lasso(y=y0, D=D, seed=1234)
-#' lambda <- cv$lambda.min
+#' lambda <- 10^seq(-2, -1, length.out=20)
+#' cv <- CV_L2E_TF_lasso(y=y0, D=D, lambdaSeq=lambda, seed=1234)
+#' (lambda_min <- cv$lambda.min)
 #' 
-#' sol <- L2E_TF_lasso(y=y0, D=D, lambdaSeq=lambda)
+#' sol <- L2E_TF_lasso(y=y0, D=D, lambdaSeq=lambda_min)
 #' 
 #' plot(x, y0, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
 #' lines(x, f, lwd=3)
@@ -43,10 +44,10 @@
 #' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
 #' lines(x, f, lwd=3)
 #' 
-#' cv <- CV_L2E_TF_lasso(y=y, D=D, seed=1234)
-#' lambda <- cv$lambda.min
+#' cv <- CV_L2E_TF_lasso(y=y, D=D, lambdaSeq=lambda, seed=1234)
+#' (lambda_min <- cv$lambda.min)
 #' 
-#' sol <- L2E_TF_lasso(y=y, D=D, lambdaSeq=lambda)
+#' sol <- L2E_TF_lasso(y=y, D=D, lambdaSeq=lambda_min)
 #' 
 #' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
 #' lines(x, f, lwd=3)
@@ -150,7 +151,7 @@ cv_fold_TF_lasso <- function(i, y, X, fold, cv.args, method="median") {
     r <- y_out - Xbeta
     tauhat <- fit.i$Tau[l]
     
-    loss[l] <- objective_tau(tau = tauhat, r = r, method=method) ### use median instead of mean to account for outliers
+    loss[l] <- objective_tau(tau=tauhat, r=r, method=method) ### use median instead of mean to account for outliers
   }
   
   return(loss)

@@ -3,7 +3,7 @@
 #' \code{CV_L2E_TF_dist} Performs k-fold cross-validation for robust trend filtering regression under the L2 criterion with distance penalty
 #' 
 #' @param y Response vector
-#' @param X Design matrix, identity matrix by default
+#' @param X Design matrix. Default is the identity matrix.
 #' @param beta0 Initial vector of regression coefficients, can be omitted
 #' @param tau0 Initial precision estimate, can be omitted
 #' @param D The fusion matrix
@@ -31,9 +31,9 @@
 #' k <- c(1,2,3,4,5)
 #' rho <- 10^6
 #' cv <- CV_L2E_TF_dist(y=y0, D=D, kSeq=k, rhoSeq=rho, seed=1234)
-#' k <- cv$k.min
+#' (k_min <- cv$k.min)
 #' 
-#' sol <- L2E_TF_dist(y=y0, D=D, kSeq=k, rhoSeq=rho)
+#' sol <- L2E_TF_dist(y=y0, D=D, kSeq=k_min, rhoSeq=rho)
 #' 
 #' plot(x, y0, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
 #' lines(x, f, lwd=3)
@@ -47,9 +47,9 @@
 #' lines(x, f, lwd=3)
 #' 
 #' cv <- CV_L2E_TF_dist(y=y, D=D, kSeq=k, rhoSeq=rho, seed=1234)
-#' k <- cv$k.min
+#' (k_min <- cv$k.min)
 #' 
-#' sol <- L2E_TF_dist(y=y, D=D, kSeq=k, rhoSeq=rho)
+#' sol <- L2E_TF_dist(y=y, D=D, kSeq=k_min, rhoSeq=rho)
 #' 
 #' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
 #' lines(x, f, lwd=3)

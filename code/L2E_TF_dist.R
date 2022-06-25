@@ -3,7 +3,7 @@
 #' \code{L2E_TF_dist} Computes the solution path of the robust trend filtering regression under the L2 criterion with distance penalty
 #' 
 #' @param y Response vector
-#' @param X Design matrix, identity matrix by default
+#' @param X Design matrix. Default is the identity matrix.
 #' @param beta0 Initial vector of regression coefficients, can be omitted
 #' @param tau0 Initial precision estimate, can be omitted
 #' @param D The fusion matrix

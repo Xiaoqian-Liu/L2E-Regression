@@ -38,33 +38,27 @@ sol_TF_lasso <- function(y, X, w, D, lambda) {
   XtWX <- XtW%*%X
   
   P <- Matrix::Matrix(0, nrow = p+2*r, ncol = p+2*r)
-  P[1:p, 1:p] <- XtWX/2
+  P[1:p, 1:p] <- XtWX
   
   q <- c(as.vector(-XtWy), rep(lambda, 2*r))
-
-  A <- cbind(D, Matrix::Diagonal(n=r, x=-1), Matrix::Diagonal(n=r, x=1))
   
-  b <- rep(0,r)
+  A <- rbind(cbind(D, Matrix::Diagonal(n=r, x=-1), Matrix::Diagonal(n=r, x=1)),
+             cbind(-D, Matrix::Diagonal(n=r, x=1), Matrix::Diagonal(n=r, x=-1)),
+             cbind(Matrix::Matrix(0, nrow=r, ncol = p,sparse = TRUE), Matrix::Diagonal(n=r, x=1), Matrix::Diagonal(n=r, x=0)),
+             cbind(Matrix::Matrix(0, nrow=r, ncol = p,sparse = TRUE), Matrix::Diagonal(n=r, x=0), Matrix::Diagonal(n=r, x=1)))
+  l <- rep(0,  4*r)
+  u <- rep(Inf, 4*r)
   
+  settings <- osqp::osqpSettings(verbose = FALSE)
   
-  model <- list()
+  model  <- osqp::osqp(P=P, q=q, A=A, l=l, u=u, settings)
   
-  model$A          <- A
-  model$Q          <- P
-  model$obj        <- as.vector(q)
-  model$modelsense <- 'min'
-  model$rhs        <- b
-  model$sense      <- rep('=', r)
-  model$lb        <- c(rep(-Inf, p), rep(0, 2*r))
-  
-  
-  params <- list(OutputFlag=0)
-  
-  result <- gurobi::gurobi(model, params)
+  result <- model$Solve()
   
   beta <- result$x[1:p]
   
   v <- result$x[(p+1):(p+r)]-result$x[(p+r+1):(p+2*r)]
-  return(list(beta=beta, v=v))
+  
+  return(list(beta = beta, v = v))
   
 }

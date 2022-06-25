@@ -55,12 +55,23 @@ l2e_regression_convex <- function(y,b,tau,max_iter=1e2,tol=1e-4,Show.Time=TRUE) 
   time <- proc.time()
   sd_y <- sd(y)
   
+  # save the inner loop iters
+  iter_beta <- rep(0, max_iter)
+  iter_tau <- rep(0, max_iter)
+  
   for (i in 1:max_iter) {
     b_last <- b
     tau_last <- tau
-    b <- update_beta_convex(y,b_last,tau_last,max_iter=1e2,tol=1e-4)$beta 
+    
+    res_beta <- update_beta_convex(y,b,tau,max_iter=1e2,tol=1e-4)
+    b <- res_beta$beta
+    iter_beta[i] <- res_beta$iter
+    
     r <- y - b
-    tau <- update_tau_R(r,tau_last, sd_y)$tau
+    res_tau <- update_tau_R(r, tau_last, sd_y)
+    tau <- res_tau$tau
+    iter_tau[i] <- res_tau$iter
+    
     A <- norm(as.matrix(b_last-b),'f') < tol*(1 + norm(as.matrix(b_last),'f'))
     B <- abs(tau_last-tau) < tol*(1 + tau_last)
     if (A & B) break
@@ -68,5 +79,6 @@ l2e_regression_convex <- function(y,b,tau,max_iter=1e2,tol=1e-4,Show.Time=TRUE) 
   
   if(Show.Time) print(proc.time() - time)
   
-  return(list(beta=b,tau=tau))
+  return(list(beta=b, tau=tau, iter=i,
+              iter_beta=iter_beta[1:i], iter_tau=iter_tau[1:i]))
 }

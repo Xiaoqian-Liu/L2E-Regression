@@ -3,7 +3,7 @@
 #' \code{L2E_TF_lasso} Computes the solution path of the robust trend filtering regression under the L2 criterion with Lasso penalty
 #' 
 #' @param y Response vector
-#' @param X Design matrix, identity matrix by default
+#' @param X Design matrix. Default is the identity matrix.
 #' @param beta0 Initial vector of regression coefficients, can be omitted
 #' @param tau0 Initial precision estimate, can be omitted
 #' @param D The fusion matrix
@@ -24,14 +24,14 @@
 #' lines(x, f, lwd=3)
 #' 
 #' D <- myGetDkn(1, n)
-#' lambda <- 10^seq(1, -1, length.out=3)
+#' lambda <- 10^seq(-2, -1, length.out=20)
 #' sol <- L2E_TF_lasso(y=y, D=D, lambdaSeq=lambda)
 #' 
 #' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
 #' lines(x, f, lwd=3)
 #' lines(x, sol$Beta[,1], col='blue', lwd=3) ## 1st lambda
-#' lines(x, sol$Beta[,2], col='red', lwd=3) ## 2nd lambda
-#' lines(x, sol$Beta[,3], col='dark green', lwd=3) ## 3rd lambda
+#' lines(x, sol$Beta[,10], col='red', lwd=3) ## 2nd lambda
+#' lines(x, sol$Beta[,20], col='dark green', lwd=3) ## 3rd lambda
 #' 
 #' ## Contaminated Data
 #' ix <- sample(1:n, 10)
@@ -45,8 +45,8 @@
 #' plot(x, y, pch=16, cex.lab=1.5, cex.axis=1.5, cex.sub=1.5, col='gray')
 #' lines(x, f, lwd=3)
 #' lines(x, sol$Beta[,1], col='blue', lwd=3) ## 1st lambda
-#' lines(x, sol$Beta[,2], col='red', lwd=3) ## 2nd lambda
-#' lines(x, sol$Beta[,3], col='dark green', lwd=3) ## 3rd lambda
+#' lines(x, sol$Beta[,10], col='red', lwd=3) ## 2nd lambda
+#' lines(x, sol$Beta[,20], col='dark green', lwd=3) ## 3rd lambda
 #' 
 L2E_TF_lasso <- function(y,X,beta0,tau0,D,lambdaSeq,max_iter=1e2,tol=1e-4,Show.Time=TRUE){
   
