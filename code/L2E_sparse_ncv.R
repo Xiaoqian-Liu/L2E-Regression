@@ -1,4 +1,4 @@
-#' Solution path of L2E sparse regression with existing penalization methods
+#' Solution path of L2E Sparse regression with existing penalization methods
 #' 
 #' \code{L2E_sparse_ncv} computes the solution path of robust sparse regression under the L2 criterion. Available penalties include lasso, MCP and SCAD.
 #' 

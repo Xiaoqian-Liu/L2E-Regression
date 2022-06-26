@@ -1,6 +1,6 @@
 #' Objective function of the L2E regression
 #' 
-#' \code{objective} compute the objective of the L2E regression 
+#' \code{objective} compute the objective of the L2E regression in terms of eta
 #' 
 #' @param eta The current estimate of eta
 #' @param r Vector of residuals
@@ -24,7 +24,7 @@ objective <- function(eta, r, method="mean"){
 
 #' Objective function of the L2E regression
 #' 
-#' \code{objective_tau} compute the objective of the L2E regression 
+#' \code{objective_tau} compute the objective of the L2E regression in terms of tau
 #' 
 #' @param tau The current estimate of tau
 #' @param r Vector of residuals

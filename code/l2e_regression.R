@@ -1,4 +1,4 @@
-#' LTE multivariate regression
+#' L2E Multivariate regression
 #' 
 #' \code{l2e_regression} Performs L2E regression via inexact coordinate descent
 #' 

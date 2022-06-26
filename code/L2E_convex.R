@@ -1,6 +1,6 @@
-#' Wrapper function for L2E convex regression
+#' L2E Convex regression
 #' 
-#' \code{L2E_convex} Performs convex regression under the L2 criterion. Available methods include projected gradient descent (PG) and majorization-minimization (MM).
+#' \code{L2E_convex} performs convex regression under the L2 criterion. Available methods include projected gradient descent (PG) and majorization-minimization (MM).
 #' 
 #' @param y Response vector
 #' @param beta Initial vector of regression coefficients

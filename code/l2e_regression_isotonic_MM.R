@@ -1,4 +1,4 @@
-#' L2E Isotonic Regression - MM
+#' L2E Isotonic regression - MM
 #' 
 #' \code{l2e_regression_isotonic} performs L2E isotonic regression via block coordinate descent 
 #' with MM for updating beta and tau

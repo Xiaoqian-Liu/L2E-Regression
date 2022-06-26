@@ -1,6 +1,6 @@
-#' Cross Validation for L2E Sparse Regression with distance penalization
+#' Cross Validation for L2E Sparse regression with distance penalization
 #' 
-#' \code{CV_L2E_sparse_dist} performs k-fold cross-validation for robust sparse regression under the L2 criterion with
+#' \code{CV_L2E_sparse_dist} Performs k-fold cross-validation for robust sparse regression under the L2 criterion with
 #' distance penalty
 #' 
 #' @param y Response vector

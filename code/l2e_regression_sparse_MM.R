@@ -1,6 +1,6 @@
-#' L2E Sparse Regression with distance penalization
+#' L2E Sparse regression with distance penalization
 #' 
-#' \code{l2e_regression_sparse_MM} Performs robust sparse regression under the L2 criterion with the distance penalty
+#' \code{l2e_regression_sparse_MM} performs robust sparse regression under the L2 criterion with the distance penalty
 #' 
 #' @param y Response vector
 #' @param X Design matrix

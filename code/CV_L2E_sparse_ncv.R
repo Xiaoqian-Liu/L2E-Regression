@@ -1,4 +1,4 @@
-#' Cross Validation for L2E Sparse Regression with existing penalization methods
+#' Cross Validation for L2E Sparse regression with existing penalization methods
 #' 
 #' \code{CV_L2E_sparse_ncv} performs k-fold cross-validation for robust sparse regression under the L2 criterion.
 #'  Available penalties include lasso, MCP and SCAD.

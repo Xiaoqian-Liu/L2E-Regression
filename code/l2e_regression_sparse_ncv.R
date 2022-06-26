@@ -1,6 +1,6 @@
-#' L2E Sparse Regression with existing penalization methods
+#' L2E Sparse regression with existing penalization methods
 #' 
-#' \code{l2e_regression_sparse_MM} Performs robust sparse regression under the L2 criterion. Available penalties include lasso, MCP and SCAD. 
+#' \code{l2e_regression_sparse_MM} performs robust sparse regression under the L2 criterion. Available penalties include lasso, MCP and SCAD. 
 
 #' @param y Response vector
 #' @param X Design matrix

@@ -1,6 +1,6 @@
-#' Wrapper function for L2E isotonic regression
+#' L2E Isotonic regression
 #' 
-#' \code{L2E_isotonic} Performs isotonic regression under the L2 criterion. Available methods include projected gradient descent (PG) and majorization-minimization (MM).
+#' \code{L2E_isotonic} performs isotonic regression under the L2 criterion. Available methods include projected gradient descent (PG) and majorization-minimization (MM).
 #' 
 #' @param y Response vector
 #' @param beta Initial vector of regression coefficients

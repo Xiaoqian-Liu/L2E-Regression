@@ -1,6 +1,6 @@
-#' Solution path of the L2E Trend Filtering Regression with Lasso
+#' Solution path of the L2E Trend Filtering regression with Lasso
 #' 
-#' \code{L2E_TF_lasso} Computes the solution path of the robust trend filtering regression under the L2 criterion with Lasso penalty
+#' \code{L2E_TF_lasso} computes the solution path of the robust trend filtering regression under the L2 criterion with Lasso penalty
 #' 
 #' @param y Response vector
 #' @param X Design matrix. Default is the identity matrix.

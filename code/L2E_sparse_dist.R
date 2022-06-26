@@ -1,6 +1,6 @@
-#' L2E Sparse Regression with distance penalization
+#' Solution path of L2E Sparse regression with distance penalization
 #' 
-#' \code{L2E_sparse_dist} Computes the solution path of the robust sparse regression under the L2 criterion with distance penalty
+#' \code{L2E_sparse_dist} computes the solution path of the robust sparse regression under the L2 criterion with distance penalty
 #' 
 #' @param y Response vector
 #' @param X Design matrix

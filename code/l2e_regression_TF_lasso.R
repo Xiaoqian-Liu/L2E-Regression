@@ -1,6 +1,6 @@
-#' L2E Trend Filtering Regression with Lasso
+#' L2E Trend Filtering regression with Lasso penalization
 #' 
-#' \code{l2e_regression_TF_lasso} Performs robust trend filtering regression under the L2 criterion with Lasso penalty
+#' \code{l2e_regression_TF_lasso} performs robust trend filtering regression under the L2 criterion with Lasso penalty
 #' 
 #' @param y Response vector
 #' @param X Design matrix

@@ -1,6 +1,6 @@
-#' Solution path of the L2E Trend Filtering Regression with distance penalization
+#' Solution path of the L2E Trend Filtering regression with distance penalization
 #' 
-#' \code{L2E_TF_dist} Computes the solution path of the robust trend filtering regression under the L2 criterion with distance penalty
+#' \code{L2E_TF_dist} computes the solution path of the robust trend filtering regression under the L2 criterion with distance penalty
 #' 
 #' @param y Response vector
 #' @param X Design matrix. Default is the identity matrix.

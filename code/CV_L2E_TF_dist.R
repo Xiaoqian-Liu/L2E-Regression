@@ -1,6 +1,6 @@
-#' Cross Validation for L2E Trend Filtering Regression with distance penalization
+#' Cross Validation for L2E Trend Filtering regression with distance penalization
 #' 
-#' \code{CV_L2E_TF_dist} Performs k-fold cross-validation for robust trend filtering regression under the L2 criterion with distance penalty
+#' \code{CV_L2E_TF_dist} performs k-fold cross-validation for robust trend filtering regression under the L2 criterion with distance penalty
 #' 
 #' @param y Response vector
 #' @param X Design matrix. Default is the identity matrix.

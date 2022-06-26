@@ -1,6 +1,6 @@
-#' L2E Trend Filtering Regression with distance penalty
+#' L2E Trend Filtering regression with distance penalization
 #' 
-#' \code{l2e_regression_TF_dist} Performs robust trend filtering regression under the L2 criterion with distance penalty
+#' \code{l2e_regression_TF_dist} performs robust trend filtering regression under the L2 criterion with distance penalty
 #' 
 #' @param y Response vector
 #' @param X Design matrix

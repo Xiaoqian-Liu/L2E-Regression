@@ -1,4 +1,4 @@
-#' L2E Regression - MM
+#' L2E Convex regression - MM
 #' 
 #' \code{l2e_regression_convex_MM} performs L2E convex regression using MM
 #' 

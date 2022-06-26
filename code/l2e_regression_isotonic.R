@@ -1,6 +1,6 @@
-#' LTE Isotonic Regression
+#' L2E Isotonic regression - PG
 #' 
-#' \code{l2e_regression_isotonic} Performs L2E isotonic regression via inexact coordinate descent.
+#' \code{l2e_regression_isotonic} performs L2E isotonic regression via inexact coordinate descent.
 #' 
 #' @param y Response vector
 #' @param b Initial vector of regression coefficients

@@ -1,6 +1,6 @@
-#' LTE Convex Regression
+#' L2E Convex regression - PG
 #' 
-#' \code{l2e_regression_convex} Performs robust convex regression using the L2 criterion
+#' \code{l2e_regression_convex} performs robust convex regression via projected gradient descent
 #' 
 #' @param y Response vector
 #' @param b Initial vector of regression coefficients

@@ -1,6 +1,6 @@
-#' Cross Validation for L2E Trend Filtering Regression with Lasso penalization
+#' Cross Validation for L2E Trend Filtering regression with Lasso penalization
 #' 
-#' \code{CV_L2E_TF_lasso} Performs k-fold cross-validation for robust trend filtering regression under the L2 criterion with the Lasso penalty
+#' \code{CV_L2E_TF_lasso} performs k-fold cross-validation for robust trend filtering regression under the L2 criterion with the Lasso penalty
 #' 
 #' @param y Response vector
 #' @param X Design matrix. Default is the identity matrix.
