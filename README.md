@@ -1,5 +1,5 @@
 # L2E-Regression
-A Computational Framework for L2E Structured Regression Problems. All code are packed into the 'L2E' R package which is available on CRAN.
+A Computational Framework for L2E Structured Regression Problems. All code are packed into the `L2E` R package which is available on CRAN.
 
 ## Installation
 install.packages('L2E')
