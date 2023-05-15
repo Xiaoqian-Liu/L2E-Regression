@@ -2,7 +2,9 @@
 A Computational Framework for L2E Structured Regression Problems. All code are packed into the `L2E` R package which is available on CRAN.
 
 ## Installation
+```{r}
 install.packages('L2E')
+```
 
 ## Getting started 
 Please see the introductory [demo](https://jocelynchi.github.io/L2E-package-demo/articles/l2e-intro.html) on how to use the L2E framework with examples from the accompanying journal manuscripts.
